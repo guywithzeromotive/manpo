@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.zero.manpo")
-    mainClass.set("com.zero.manpo.HelloApplication")
+    mainClass.set("com.zero.manpo.MainApplication")
 }
 
 javafx {
@@ -36,9 +36,6 @@ javafx {
 }
 
 dependencies {
-    implementation("com.dlsc.formsfx:formsfx-core:11.6.0") {
-        exclude(group = "org.openjfx")
-    }
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
