@@ -70,8 +70,14 @@ public class MainApplication extends Application {
         Label projDeepDiveLabel = new Label("Deep Dive");
         TextArea projDeepDiveInput = new TextArea();
 
-        //TODO: Image group input
+        Label projImageLabel = new Label("Image");
 
+        HBox projImageUploadContainer = new HBox();
+        Label browseImageLabel = new Label("Browse Images ....");
+        Button uploadImageBtn = new Button("Upload Image");
+
+        projImageUploadContainer.getChildren().add(browseImageLabel);
+        projImageUploadContainer.getChildren().add(uploadImageBtn);
 
 
         gridPane.add(formLabel, 1, 1);
@@ -81,6 +87,7 @@ public class MainApplication extends Application {
         gridPane.add(projRepoLabel, 0, 5); gridPane.add(projRepoInput, 1, 5);
         gridPane.add(projDescriptionLabel, 0, 6); gridPane.add(projDescriptionInput, 1, 6);
         gridPane.add(projDeepDiveLabel, 0, 7); gridPane.add(projDeepDiveInput, 1, 7);
+        gridPane.add(projImageLabel, 0, 8); gridPane.add(projImageUploadContainer, 1, 8);
 
 
         Separator sp = new Separator();
