@@ -8,10 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class MainApplication extends Application {
@@ -19,7 +21,7 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         //FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(setupPage(), 700, 500);
-        stage.setTitle("Hello!");
+        stage.setTitle("ManPo");
         stage.setScene(scene);
         stage.show();
     }
@@ -43,7 +45,21 @@ public class MainApplication extends Application {
         ObservableList<String> projStatuses = FXCollections.observableArrayList("Completed", "Ongoing", "Planned");
         ComboBox<String> projStatusComboBox = new ComboBox<>(projStatuses);
 
-        //TODO: Insert a radio button for private and not
+        Label projTypeLabel = new Label("Type");
+        ToggleGroup projTypeToggleGroup = new ToggleGroup();
+        RadioButton publicType = new RadioButton("Public");
+        RadioButton privateType = new RadioButton("Private");
+
+        publicType.setToggleGroup(projTypeToggleGroup);
+        privateType.setToggleGroup(projTypeToggleGroup);
+
+        publicType.setSelected(true);
+
+        HBox projTypeContainer = new HBox();
+        projTypeContainer.setSpacing(3d);
+
+        projTypeContainer.getChildren().add(publicType);
+        projTypeContainer.getChildren().add(privateType);
 
         Label projRepoLabel = new Label("Repo Link");
         TextField projRepoInput = new TextField();
@@ -61,7 +77,7 @@ public class MainApplication extends Application {
         gridPane.add(formLabel, 1, 1);
         gridPane.add(projNameLabel, 0, 2); gridPane.add(projNameInput, 1, 2);
         gridPane.add(projStatusLabel, 0, 3); gridPane.add(projStatusComboBox, 1, 3);
-        //gridPane.add(projNameLabel, 0, 4); gridPane.add(projNameInput, 1, 4);
+        gridPane.add(projTypeLabel, 0, 4); gridPane.add(projTypeContainer, 1, 4);
         gridPane.add(projRepoLabel, 0, 5); gridPane.add(projRepoInput, 1, 5);
         gridPane.add(projDescriptionLabel, 0, 6); gridPane.add(projDescriptionInput, 1, 6);
         gridPane.add(projDeepDiveLabel, 0, 7); gridPane.add(projDeepDiveInput, 1, 7);
