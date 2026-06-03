@@ -48,7 +48,7 @@ public class MainApplication extends Application {
         Label projTypeLabel = new Label("Type");
         ToggleGroup projTypeToggleGroup = new ToggleGroup();
         RadioButton publicType = new RadioButton("Public");
-        RadioButton privateType = new RadioButton("Private");
+        RadioButton privateType = new RadioButton("Proprietary");
 
         publicType.setToggleGroup(projTypeToggleGroup);
         privateType.setToggleGroup(projTypeToggleGroup);
