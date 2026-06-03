@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.zero.manpo")
-    mainClass.set("com.zero.manpo.MainApplication")
+    mainClass.set("com.zero.manpo.UI")
 }
 
 javafx {
