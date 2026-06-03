@@ -96,6 +96,7 @@ public class MainApplication extends Application {
 
         Separator sp = new Separator();
 
+        setButtonListener();
         btnBar.getButtons().addAll(submitProjBtn, clearFormBtn);
 
         vbox.getChildren().addAll(gridPane, sp, btnBar);
@@ -103,9 +104,19 @@ public class MainApplication extends Application {
         return vbox;
     }
 
-    private void setButtonListener(Button submit, Button clear){
-        submit.setOnAction( event -> {
+    private void setButtonListener(){
+        submitProjBtn.setOnAction( event -> {
 
+        });
+
+        clearFormBtn.setOnAction( event -> {
+            projNameInput.setText("");
+            //TODO: set status to default
+            publicType.setSelected(true);
+            projRepoInput.setText("");
+            projDescriptionInput.setText("");
+            projDeepDiveInput.setText("");
+            //TODO: Remove added image
         });
     }
 
