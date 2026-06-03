@@ -17,6 +17,37 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class MainApplication extends Application {
+    protected Label formLabel = new Label("ManPo");
+
+    protected Label projNameLabel = new Label("Name");
+    protected TextField projNameInput = new TextField();
+
+    protected Label projStatusLabel = new Label("Status");
+    protected ObservableList<String> projStatuses = FXCollections.observableArrayList("Completed", "Ongoing", "Planned");
+    protected ComboBox<String> projStatusComboBox = new ComboBox<>(projStatuses);
+
+    protected Label projTypeLabel = new Label("Type");
+    protected ToggleGroup projTypeToggleGroup = new ToggleGroup();
+    protected RadioButton publicType = new RadioButton("Public");
+    protected RadioButton privateType = new RadioButton("Proprietary");
+
+    protected Label projRepoLabel = new Label("Repo Link");
+    protected TextField projRepoInput = new TextField();
+
+    protected Label projDescriptionLabel = new Label("Description");
+    protected TextArea projDescriptionInput = new TextArea();
+
+    protected Label projDeepDiveLabel = new Label("Deep Dive");
+    protected TextArea projDeepDiveInput = new TextArea();
+
+    protected Label projImageLabel = new Label("Image");
+    protected Label browseImageLabel = new Label("Browse Images ....");
+    protected Button uploadImageBtn = new Button("Upload Image");
+
+    protected ButtonBar btnBar = new ButtonBar();
+    protected Button submitProjBtn = new Button("Submit");
+    protected Button clearFormBtn = new Button("Clear Form");
+
     @Override
     public void start(Stage stage) throws IOException {
         //FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
@@ -37,20 +68,6 @@ public class MainApplication extends Application {
 
         VBox.setVgrow(gridPane, Priority.ALWAYS );
 
-        Label formLabel = new Label("ManPo");
-
-        Label projNameLabel = new Label("Name");
-        TextField projNameInput = new TextField();
-
-        Label projStatusLabel = new Label("Status");
-        ObservableList<String> projStatuses = FXCollections.observableArrayList("Completed", "Ongoing", "Planned");
-        ComboBox<String> projStatusComboBox = new ComboBox<>(projStatuses);
-
-        Label projTypeLabel = new Label("Type");
-        ToggleGroup projTypeToggleGroup = new ToggleGroup();
-        RadioButton publicType = new RadioButton("Public");
-        RadioButton privateType = new RadioButton("Proprietary");
-
         publicType.setToggleGroup(projTypeToggleGroup);
         privateType.setToggleGroup(projTypeToggleGroup);
 
@@ -62,24 +79,11 @@ public class MainApplication extends Application {
         projTypeContainer.getChildren().add(publicType);
         projTypeContainer.getChildren().add(privateType);
 
-        Label projRepoLabel = new Label("Repo Link");
-        TextField projRepoInput = new TextField();
-
-        Label projDescriptionLabel = new Label("Description");
-        TextArea projDescriptionInput = new TextArea();
-
-        Label projDeepDiveLabel = new Label("Deep Dive");
-        TextArea projDeepDiveInput = new TextArea();
-
-        Label projImageLabel = new Label("Image");
-
         HBox projImageUploadContainer = new HBox();
-        Label browseImageLabel = new Label("Browse Images ....");
-        Button uploadImageBtn = new Button("Upload Image");
+
 
         projImageUploadContainer.getChildren().add(browseImageLabel);
         projImageUploadContainer.getChildren().add(uploadImageBtn);
-
 
         gridPane.add(formLabel, 1, 1);
         gridPane.add(projNameLabel, 0, 2); gridPane.add(projNameInput, 1, 2);
@@ -90,13 +94,7 @@ public class MainApplication extends Application {
         gridPane.add(projDeepDiveLabel, 0, 7); gridPane.add(projDeepDiveInput, 1, 7);
         gridPane.add(projImageLabel, 0, 8); gridPane.add(projImageUploadContainer, 1, 8);
 
-
         Separator sp = new Separator();
-
-        ButtonBar btnBar = new ButtonBar();
-
-        Button submitProjBtn = new Button("Submit");
-        Button clearFormBtn = new Button("Clear Form");
 
         btnBar.getButtons().addAll(submitProjBtn, clearFormBtn);
 
@@ -104,4 +102,11 @@ public class MainApplication extends Application {
 
         return vbox;
     }
+
+    private void setButtonListener(Button submit, Button clear){
+        submit.setOnAction( event -> {
+
+        });
+    }
+
 }
