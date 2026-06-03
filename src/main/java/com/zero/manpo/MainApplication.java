@@ -28,6 +28,7 @@ public class MainApplication extends Application {
 
     private Parent setupPage(){
         VBox vbox = new VBox();
+        vbox.setPadding(new Insets(30));
         GridPane gridPane = new GridPane();
 
         gridPane.setPadding( new Insets(10) );
