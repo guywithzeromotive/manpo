@@ -7,16 +7,23 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 
-public class MainApplication extends Application {
+public class UI extends Application {
     protected Label formLabel = new Label("ManPo");
 
     protected Label projNameLabel = new Label("Name");
@@ -48,16 +55,18 @@ public class MainApplication extends Application {
     protected Button submitProjBtn = new Button("Submit");
     protected Button clearFormBtn = new Button("Clear Form");
 
+    protected ImageView projImgView = new ImageView();
+
     @Override
     public void start(Stage stage) throws IOException {
         //FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(setupPage(), 700, 500);
+        Scene scene = new Scene(setupPage(stage), 700, 500);
         stage.setTitle("ManPo");
         stage.setScene(scene);
         stage.show();
     }
 
-    private Parent setupPage(){
+    private Parent setupPage(Stage stage){
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(30));
         GridPane gridPane = new GridPane();
@@ -96,7 +105,7 @@ public class MainApplication extends Application {
 
         Separator sp = new Separator();
 
-        setButtonListener();
+        setButtonListener(stage);
         btnBar.getButtons().addAll(submitProjBtn, clearFormBtn);
 
         vbox.getChildren().addAll(gridPane, sp, btnBar);
@@ -104,7 +113,7 @@ public class MainApplication extends Application {
         return vbox;
     }
 
-    private void setButtonListener(){
+    private void setButtonListener(Stage stage){
         submitProjBtn.setOnAction( event -> {
 
         });
@@ -117,6 +126,19 @@ public class MainApplication extends Application {
             projDescriptionInput.setText("");
             projDeepDiveInput.setText("");
             //TODO: Remove added image
+        });
+
+        uploadImageBtn.setOnAction( event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Pick an Image");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png")
+            );
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            if (selectedFile != null){
+                Image img = new Image(selectedFile.toURI().toString());
+                projImgView.setImage(img);
+            }
         });
     }
 
