@@ -13,7 +13,7 @@ public class ValidatorTest {
         assertFalse(Validator.validateProjectLink("ello"));
         assertFalse(Validator.validateProjectLink(""));
         assertTrue(Validator.validateProjectLink("git@github.com:zeroNhatty/manpo.git"));
-        assertTrue(Validator.validateProjectLink(" git@github.com:zeroNhatty/manpo.git "));
+        assertFalse(Validator.validateProjectLink(" git@github.com:zeroNhatty/manpo.git "));
         assertFalse(Validator.validateProjectLink("git@github.com:zeroNhatty/manpodweqdafs.git"));
     }
 }
