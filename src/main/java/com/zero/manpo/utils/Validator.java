@@ -27,8 +27,10 @@ public class Validator {
      * </p>
      *
      * @param projLink the remote Git repository URL to validate
-     * @return {@code ErrorRelay.isSuccessful = true} if the repository is reachable and valid;
-     * {@code  ErrorRelay.isSuccessful = false} if the link is invalid, blank, or unreachable within the timeout period
+     * @return an {@link ErrorRelay} instance containing the validation results.
+     * The relay will have {@code isSuccessful()} set to {@code true} if
+     * the repository is reachable; otherwise, {@code isSuccessful()} will
+     * be {@code false} and a descriptive error message will be populated.
      *
      * @since 0.1
      * @see <a href="https://git-scm.com/docs/git-ls-remote">Git ls-remote Documentation</a>
