@@ -1,6 +1,6 @@
 package com.zero.manpo.utils;
 
-import com.zero.manpo.models.error.ErrorRelay;
+import com.zero.manpo.core.ErrorRelay;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

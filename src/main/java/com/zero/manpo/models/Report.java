@@ -4,12 +4,14 @@ public class Report {
 
     //TODO: add missing status, report type, image
     private String projectName;
+    private ReportType reportType;
     private String projectLink;
     private String projectDescription;
     private String projectDeepDive;
 
-    Report(String projectName, String projectLink, String projectDescription, String projectDeepDive){
+    public Report(String projectName, ReportType reportType, String projectLink, String projectDescription, String projectDeepDive){
         this.projectName = projectName;
+        this.reportType = reportType;
         this.projectLink = projectLink;
         this.projectDescription =  projectDescription;
         this.projectDeepDive = projectDeepDive;
@@ -17,6 +19,10 @@ public class Report {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public void setReportType(ReportType reportType) {
+        this.reportType = reportType;
     }
 
     public void setProjectLink(String projectLink) {
@@ -33,6 +39,10 @@ public class Report {
 
     public String getProjectName() {
         return projectName;
+    }
+
+    public ReportType getReportType() {
+        return reportType;
     }
 
     public String getProjectLink() {

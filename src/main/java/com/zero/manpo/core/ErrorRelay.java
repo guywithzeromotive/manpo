@@ -1,4 +1,4 @@
-package com.zero.manpo.models.error;
+package com.zero.manpo.core;
 
 /**
  * A data transfer object used to relay execution states and error messages

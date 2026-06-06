@@ -1,5 +1,8 @@
 package com.zero.manpo;
 
+import com.zero.manpo.models.Report;
+import com.zero.manpo.models.ReportType;
+import com.zero.manpo.utils.Validator;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -115,7 +118,20 @@ public class UI extends Application {
 
     private void setButtonListener(Stage stage){
         submitProjBtn.setOnAction( event -> {
-
+            String projName = projNameInput.getText();
+            String projLink = projRepoInput.getText().trim();
+            String projDescription = projDescriptionInput.getText();
+            String projDeepDive = projDeepDiveInput.getText();
+            // TODO: add missing attributes (images, status)
+            if(!projName.isEmpty() && !projDescription.isEmpty()){
+                ReportType type = publicType.isSelected() ? ReportType.Public : ReportType.Proprietary;
+                if(Validator.validateProjectLink(projLink).isSuccessful()){
+                    Report report = new Report(projName, type, projLink, projDescription, projDeepDive);
+                    // TODO: crud
+                }else{
+                    // TODO: enable an error message
+                }
+            }
         });
 
         clearFormBtn.setOnAction( event -> {

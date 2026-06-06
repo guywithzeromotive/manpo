@@ -1,6 +1,6 @@
 package com.zero.manpo.utils;
 
-import com.zero.manpo.models.error.ErrorRelay;
+import com.zero.manpo.core.ErrorRelay;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
