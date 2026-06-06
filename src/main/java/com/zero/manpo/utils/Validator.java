@@ -1,5 +1,7 @@
 package com.zero.manpo.utils;
 
+import com.zero.manpo.models.error.ErrorRelay;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -31,9 +33,12 @@ public class Validator {
      * @since 0.1
      * @see <a href="https://git-scm.com/docs/git-ls-remote">Git ls-remote Documentation</a>
      */
-    public static boolean validateProjectLink(String projLink) {
+    public static ErrorRelay validateProjectLink(String projLink) {
+        ErrorRelay err = new ErrorRelay();
+
         if (projLink == null || projLink.isBlank()) {
-            return false;
+            err.setErrMsg("Project Link Input is Empty!");
+            return err;
         }
 
         String[] cmd = {"git", "ls-remote", projLink};
@@ -49,20 +54,27 @@ public class Validator {
 
             if (!finished) {
                 process.destroyForcibly();
-                return false;
+                err.setErrMsg("git Authentication Timeout!");
+                return err;
             }
 
             int exitCode = process.exitValue();
-            System.out.println("Git process exited with code: " + exitCode);
 
-            return exitCode == 0;
+            if (exitCode == 0) {
+                err.setIsSuccessful(true);
+            } else {
+                err.setErrMsg("Couldn't reach remote repository");
+                System.out.println("Exit Code: " + exitCode);
+            }
+            return err;
 
         } catch (IOException e) {
-            System.err.println("Git command executable not found: " + e.getMessage());
-            return false;
+            err.setErrMsg("Git command executable not found: " + e.getMessage());
+            return err;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            return false;
+            err.setErrMsg("Thread Interruption: " + e.getMessage());
+            return err;
         }
     }
 
