@@ -5,32 +5,54 @@ import com.zero.manpo.utils.Validator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 public class ValidatorTest {
 
     @Test
-    void testValidateProjectLink(){
-        ErrorRelay err = new ErrorRelay();
-        err.setErrMsg("Project Link Input is Empty!");
-        assertEquals(err.getErrMsg(), Validator.validateProjectLink("").getErrMsg());
-        assertEquals(err.isSuccessful(), Validator.validateProjectLink("").isSuccessful());
+    void testValidateProjectLink_WithEmptyInput() {
+        ErrorRelay result = Validator.validateProjectLink("");
 
-        err.setErrMsg("Couldn't reach remote repository");
-        assertEquals(err.getErrMsg(), Validator.validateProjectLink("ello").getErrMsg());
-        assertEquals(err.isSuccessful(), Validator.validateProjectLink("ello").isSuccessful());
+        assertFalse(result.isSuccessful());
+        assertEquals("Project Link Input is Empty!", result.getErrMsg());
+    }
 
-        err.setErrMsg("Couldn't reach remote repository");
-        assertEquals(err.getErrMsg(), Validator.validateProjectLink(" git@github.com:zeroNhatty/manpo.git ").getErrMsg());
-        assertEquals(err.isSuccessful(), Validator.validateProjectLink(" git@github.com:zeroNhatty/manpo.git ").isSuccessful());
+    @Test
+    void testValidateProjectLink_WithInvalidString() {
+        ErrorRelay result = Validator.validateProjectLink("hello");
 
-        err.setErrMsg("Couldn't reach remote repository");
-        assertEquals(err.getErrMsg(), Validator.validateProjectLink("git@github.com:zeroNhatty/manpodweqdafs.git").getErrMsg());
-        assertEquals(err.isSuccessful(), Validator.validateProjectLink("git@github.com:zeroNhatty/manpodweqdafs.git").isSuccessful());
+        assertFalse(result.isSuccessful());
+        assertEquals("Couldn't reach remote repository", result.getErrMsg());
+    }
 
-        //we assume we have internet connection else it will fail
-        err.setIsSuccessful(true);
-        err.setErrMsg("");
-        assertEquals(err.getErrMsg(), Validator.validateProjectLink("git@github.com:zeroNhatty/manpo.git").getErrMsg());
-        assertEquals(err.isSuccessful(), Validator.validateProjectLink("git@github.com:zeroNhatty/manpo.git").isSuccessful());
+    @Test
+    void testValidateProjectLink_WithUntrimmedSpaces() {
+        ErrorRelay result = Validator.validateProjectLink(" git@github.com:zeroNhatty/manpo.git ");
+
+        assertFalse(result.isSuccessful());
+        assertEquals("Couldn't reach remote repository", result.getErrMsg());
+    }
+
+    @Test
+    void testValidateProjectLink_WithInternalSpaces() {
+        ErrorRelay result = Validator.validateProjectLink("git@github.com:zeroNh atty/manpo.git");
+
+        assertFalse(result.isSuccessful());
+        assertEquals("Couldn't reach remote repository", result.getErrMsg());
+    }
+
+    @Test
+    void testValidateProjectLink_WithNonExistentRepository() {
+        ErrorRelay result = Validator.validateProjectLink("git@github.com:zeroNhatty/manpodweqdafs.git");
+
+        assertFalse(result.isSuccessful());
+        assertEquals("Couldn't reach remote repository", result.getErrMsg());
+    }
+
+    @Test
+    void testValidateProjectLink_WithValidRepository() {
+        // NOTE: This test requires active internet and valid environment git credentials to pass
+        ErrorRelay result = Validator.validateProjectLink("git@github.com:zeroNhatty/manpo.git");
+
+        assertTrue(result.isSuccessful());
+        assertEquals("", result.getErrMsg());
     }
 }
