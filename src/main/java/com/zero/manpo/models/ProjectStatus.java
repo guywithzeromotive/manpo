@@ -2,7 +2,8 @@ package com.zero.manpo.models;
 
 public enum ProjectStatus {
     Ongoing,
-    Active,
+    Completed,
     Planned,
+    Archived,
     Dropped
 }
