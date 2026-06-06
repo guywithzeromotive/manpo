@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * </p>
  *
  * @author zeroNhatty
- * @version 0.1-SNAPSHOT
+ * @version 0.1.1-SNAPSHOT
  * @since 0.1
  */
 
@@ -27,8 +27,8 @@ public class Validator {
      * </p>
      *
      * @param projLink the remote Git repository URL to validate
-     * @return {@code true} if the repository is reachable and valid;
-     * {@code false} if the link is invalid, blank, or unreachable within the timeout period
+     * @return {@code ErrorRelay.isSuccessful = true} if the repository is reachable and valid;
+     * {@code  ErrorRelay.isSuccessful = false} if the link is invalid, blank, or unreachable within the timeout period
      *
      * @since 0.1
      * @see <a href="https://git-scm.com/docs/git-ls-remote">Git ls-remote Documentation</a>
