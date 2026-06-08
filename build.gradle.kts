@@ -14,7 +14,7 @@ repositories {
 }
 
 val junitVersion = "5.12.1"
-
+val gsonVersion = "2.14.0"
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -40,6 +40,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    implementation("com.google.code.gson:gson:$gsonVersion")
 }
 
 tasks.withType<Test> {
